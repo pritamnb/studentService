@@ -1,7 +1,7 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express, {Application, NextFunction, Request, Response } from 'express'
 import {StudentController} from '../controllers/students.controller'
 class Index{
-    public app :express.Application = express()
+    public app :Application = express()
     private studentController : StudentController
     constructor(){
         this.studentController = new StudentController()

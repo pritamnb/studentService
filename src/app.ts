@@ -1,11 +1,11 @@
-import  express from 'express'
+import  express,{Application} from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import Index from './index'
 const PORT = process.env.PORT || 3000
 class App{
-    public express: express.Application
+    public express: Application
     constructor(){
         this.express = express()
         this.listen()
