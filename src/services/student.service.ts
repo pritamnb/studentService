@@ -1,59 +1,54 @@
 import { NextFunction, Request, Response } from "express"
-
-export class StudentService{
-    students = []
-    constructor(){
+import { promises } from 'fs'
+import { Utils } from '../utils/utils'
+import { Student } from '../interfaces/student.interface'
+export class StudentService {
+    private utils: Utils
+    constructor() {
+        this.utils = new Utils()
     }
-    getStudents(req:Request,res:Response,next:NextFunction){
-        try{
-            // throw new Error()
-            const {name=''}=req.query
-            if(!name){
-                return res.send({
-                    success:true,
-                    message:'List of students',
-                    data: this.students
-                })
-            }else if(name.length>0){
-                let data
-                const indexOfName = this.students.map(ele=>ele.name).indexOf(name)
-                let isStudent = this.students[indexOfName]
-                if(isStudent){
-                    data ={
-                        success:true,
-                        message:"Student found",
-                        data:isStudent
-                    }
-                }else{
-                    data= {
-                        success:false,
-                        message:'Student not found!',
-                        data:[]
-                    }
-                }
-                return res.send(data)
-            }
-        }catch(err){
+    async getStudents(req: Request, res: Response, next: NextFunction) {
+        try {
+            let students: Student[] = await this.utils.getStudents()
+            return res.send({
+                success: true,
+                message: 'List of students',
+                data: students
+            })
+        } catch (err) {
             next(err)
         }
     }
-    addStudent(req:Request,res:Response,next:NextFunction){
-        try{
-            console.log("🚀 ~ file: student.service.ts ~ line 22 ~ StudentService ~ addStudent ~ req.body", req.body)
-            const {name='', age='', marks='', subject=''} = req.body
-            const student = {
+    async addStudent(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { name = '', age = '', marks = '', subject = '' } = req.body
+            if (!name || !age || !subject) return res.send({ success: false, message: 'Please enter require fields!', data: [] })
+            const students: Student[] = await this.utils.getStudents()
+            console.log("🚀 ~ file: student.service.ts ~ line 27 ~ StudentService ~ addStudent ~ students", students)
+            const studentId = this.utils.getNextAvailableId(students)
+            const student: Student = {
+                studentId,
                 name,
                 age,
                 marks,
                 subject
             }
-            this.students.push(student)
+            students.push(student)
+            this.utils.saveStudentsData(students)
             return res.send({
-                success:true,
-                message:'Student added successfully !',
-                data:this.students
+                success: true,
+                message: 'Student added successfully !',
+                data: students
             })
-        }catch(err){
+        } catch (err) {
+            next(err)
+        }
+    }
+    async getStudentByName(req: Request, res: Response, next: NextFunction) {
+        try {
+            const students: Student[] = await this.utils.getStudents()
+
+        } catch (err) {
             next(err)
         }
     }
