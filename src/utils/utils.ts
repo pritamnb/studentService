@@ -1,6 +1,6 @@
 import { promises } from 'fs'
 import { Student } from '../interfaces/student.interface'
-const Students = './src/data/students.json'
+const Students = './data/students.json'
 export class Utils {
     async getStudents() {
         let students = []

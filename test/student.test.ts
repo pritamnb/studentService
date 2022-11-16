@@ -1,67 +1,58 @@
 import request from "supertest";
-import { Express } from 'express-serve-static-core';
+import supertest from "supertest";
 import app from "../src/app"
 let server: Express.Application
 
 beforeAll(async () => {
-    server = await app
+    server = app
 })
 
-describe('API testing', () => {
-
-    it('get Students should return 200', (done) => {
-        request(server)
-            .get('/api/student')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', 'application/json; charset=utf-8')
-            .expect(200)
-            .end(async (err, res) => {
-                if (err) return done(err)
-
-                expect(res.body).toMatchObject(
-                    {
-                        success: true,
-                        message: 'List of students'
-                    }
-                )
-                done()
+describe('Student', () => {
+    describe("get list of students", () => {
+        it('get Students should return 200', async () => {
+            // request(server)
+            const { statusCode, body } = await supertest(server)
+                .get('/api/student')
+                .set('Accept', 'application/json')
+            // expect('Content-Type', 'application/json; charset=utf-8')
+            expect(statusCode).toBe(200)
+            expect(body).toEqual({
+                success: true,
+                message: 'List of students',
+                data: expect.any(Array)
             })
+        })
     })
 
-    // it('Add student should return 200 with added entry', (done) => {
-    //     const payload = {
-    //         "name": "Pritam",
-    //         "age": 25,
-    //         "marks": "80",
-    //         "subject": "Maths"
-    //     }
-    //     request(server)
-    //         .post('/api/student')
-    //         .send(payload)
-    //         .set('Accept', 'application/json')
-    //         .expect('Content-Type', 'application/json; charset=utf-8')
-    //         .expect(200)
-    //         .end(async (err, res) => {
-    //             console.log("🚀 ~ file: student.test.ts ~ line 34 ~ .end ~ err", err)
-    //             console.log("🚀 ~ file: student.test.ts ~ line 44 ~ .end ~ res", res.body)
-    //             if (err) return done(err)
-    //             expect(res.body).toMatchObject(
-    //                 {
-    //                     success: true,
-    //                     message: 'Student added successfully !',
-    //                     data:
-    //                     {
-    //                         "studentId": 1,
-    //                         "name": "Pritam",
-    //                         "age": 25,
-    //                         "marks": "80",
-    //                         "subject": "Maths"
-    //                     }
 
-    //                 }
-    //             )
-    //         })
-    // }, 1000)
+    describe('Create a student', () => {
+        it("Should return a 200 and created student", async () => {
+            const payload = {
+                "name": "Pritam",
+                "age": 25,
+                "marks": "80",
+                "subject": "Maths"
+            }
+            const { statusCode, body } = await supertest(server)
+                .post("/api/student")
+                .send(payload)
+            expect(statusCode).toBe(200);
+            expect(body).toEqual({
+
+                success: true,
+                message: 'Student added successfully !',
+                data:
+                {
+                    "studentId": expect.any(Number),
+                    "name": "Pritam",
+                    "age": 25,
+                    "marks": "80",
+                    "subject": "Maths"
+                }
+            })
+        })
+
+    })
 
     it('get Student by Name should return 200', (done) => {
         request(server)

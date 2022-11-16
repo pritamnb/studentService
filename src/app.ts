@@ -40,5 +40,8 @@ class App {
         this.express.use(bodyParser.urlencoded({ extended: false }))
         this.express.use(cors({ origin: "*" }))
     }
+    public createdServer() {
+        return express
+    }
 }
 export default new App().express

@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express"
-import { promises } from 'fs'
 import { Utils } from '../utils/utils'
 import { Student } from '../interfaces/student.interface'
 class StudentService {
