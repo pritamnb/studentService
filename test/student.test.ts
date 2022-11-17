@@ -10,11 +10,9 @@ beforeAll(async () => {
 describe('Student', () => {
     describe("get list of students", () => {
         it('get Students should return 200', async () => {
-            // request(server)
             const { statusCode, body } = await supertest(server)
                 .get('/api/student')
                 .set('Accept', 'application/json')
-            // expect('Content-Type', 'application/json; charset=utf-8')
             expect(statusCode).toBe(200)
             expect(body).toEqual({
                 success: true,

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { Utils } from '../utils/utils'
 import { Student } from '../interfaces/student.interface'
-class StudentService {
+export class StudentService {
     private utils: Utils
     constructor() {
         this.utils = new Utils()
@@ -75,4 +75,4 @@ class StudentService {
     }
 }
 
-export default new StudentService()
+// export default new StudentService()
