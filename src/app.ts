@@ -3,10 +3,15 @@ import morgan from 'morgan'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import Index from './routes/index'
+import { connectDB, disconnectDB } from './config/db'
+import mongoose from 'mongoose'
+
+require('dotenv').config()
 const PORT = process.env.PORT || 3000
 class App {
     public express: Application
     constructor() {
+        connectDB()
         this.express = express()
         this.listen()
         this.middleware()
@@ -40,8 +45,7 @@ class App {
         this.express.use(bodyParser.urlencoded({ extended: false }))
         this.express.use(cors({ origin: "*" }))
     }
-    public createdServer() {
-        return express
-    }
+
+
 }
 export default new App().express

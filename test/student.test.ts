@@ -16,7 +16,7 @@ describe('Student', () => {
             expect(statusCode).toBe(200)
             expect(body).toEqual({
                 success: true,
-                message: 'List of students',
+                message: 'Student(s) found.',
                 data: expect.any(Array)
             })
         })
@@ -26,7 +26,7 @@ describe('Student', () => {
     describe('Create a student', () => {
         it("Should return a 200 and created student", async () => {
             const payload = {
-                "name": "Pritam",
+                "name": "Test",
                 "age": 25,
                 "marks": "80",
                 "subject": "Maths"
@@ -36,16 +36,18 @@ describe('Student', () => {
                 .send(payload)
             expect(statusCode).toBe(200);
             expect(body).toEqual({
-
                 success: true,
                 message: 'Student added successfully !',
                 data:
                 {
-                    "studentId": expect.any(Number),
-                    "name": "Pritam",
+                    "name": "Test",
                     "age": 25,
                     "marks": "80",
-                    "subject": "Maths"
+                    "subject": "Maths",
+                    "_id": expect.any(String),
+                    "createdAt": expect.any(String),
+                    "updatedAt": expect.any(String),
+                    "__v": expect.any(Number)
                 }
             })
         })

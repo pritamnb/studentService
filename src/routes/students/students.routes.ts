@@ -13,7 +13,7 @@ class Student {
             this.studentController.getStudent(req, res, next)
         })
         this.app.get('/getStudentByName', (req: Request, res: Response, next: NextFunction) => {
-            this.studentController.getStudent(req, res, next)
+            this.studentController.getStudentByName(req, res, next)
         })
     }
     postRoutes() {
