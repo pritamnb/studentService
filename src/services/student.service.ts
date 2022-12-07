@@ -27,10 +27,16 @@ export class StudentService {
 
     async getStudents(req: Request, res: Response, next: NextFunction) {
         try {
+
             let data: object[] = [], response = {}
             const { name = '', pageNumber = 1, limit = 10 } = req.query
             const queryParams = { name, pageNumber, limit }
             const students = await getStudents(queryParams)
+            const getFileNames = await this.utils.getFileNames()
+            const getFileData = await this.utils.getStudents('./data/876545678.json')
+            console.log("🚀 ~ file: student.service.ts:37 ~ StudentService ~ getStudents ~ getFileData", getFileData)
+            console.log("🚀 ~ file: student.service.ts:36 ~ StudentService ~ getStudents ~ getFileNames ", getFileNames)
+
             response = {
                 success: students.success,
                 message: students.message,

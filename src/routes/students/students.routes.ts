@@ -15,6 +15,7 @@ class Student {
         this.app.get('/getStudentByName', (req: Request, res: Response, next: NextFunction) => {
             this.studentController.getStudentByName(req, res, next)
         })
+
     }
     postRoutes() {
         this.app.post('/', (req: Request, res: Response, next: NextFunction) => {
