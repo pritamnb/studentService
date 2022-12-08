@@ -16,11 +16,11 @@ beforeAll(async () => {
     // server = app
     inputFileNames = await utils.getFileNames()
     outPutFiles = await utils.getFileNames(`./response`)
-    console.log("🚀 ~ file: student.test.ts:13 ~ beforeAll ~ fileNames", inputFileNames, outPutFiles)
+    // console.log("🚀 ~ file: student.test.ts:13 ~ beforeAll ~ fileNames", inputFileNames, outPutFiles)
     for (let i = 0; i < inputFileNames?.length; i++) {
         const readFile = await utils.readFileData(`./data/${inputFileNames[i]}`)
         // instead of calling the file call the calculate function and store the output of that function return
-        console.log("🚀 ~ file: student.test.ts:23 ~ beforeAll ~ readFile", readFile)
+        // console.log("🚀 ~ file: student.test.ts:23 ~ beforeAll ~ readFile", readFile)
         inputData.push({ name: inputFileNames[i], data: readFile })
     }
     for (let o = 0; o < outPutFiles?.length; o++) {
@@ -111,48 +111,35 @@ beforeEach(async () => {
 // describe('Get files=========================================== ', () => {
 
 //     // describe('Testing all files ', () => {
+//     console.log('File Data \n Input : ', inputData, '\n output : ', outputData);
 
-//     //     if (fileNames?.length > 0) {
-//     //         console.log('===================================================');
+//     if (inputData?.length > 0) {
+//         console.log('===================================================');
 
-//     //         console.log('Inside if condition');
-//     //         console.log('===================================================');
+//         console.log('Inside if condition');
+//         console.log('===================================================');
 
-//     //         fileNames?.forEach(element => {
-//     //             describe('Reading each file one by one', () => {
-//     //                 beforeAll(async () => {
-//     //                     console.log('Reading file : ', element);
-//     //                 })
-//     //                 it('Should be string', () => {
-//     //                     assert(element === element)
-//     //                 })
-//     //             })
-//     //         });
-//     //     } else {
-//     //         console.log('------------------------------------------');
-
-//     //         console.log('else  condition');
-//     //         console.log('------------------------------------------');
-
-//     //     }
-//     //     it('Should pass', () => {
-
-//     //     })
-//     // })
-
-//     describe('async behavior', () => {
-//         (() =>
-//             describe('block 1', () => {
-//                 console.log('fileNames ************************************88', fileNames);
-//                 it('Should pass', () => {
+//         inputData?.forEach(element => {
+//             describe('Reading each file one by one', () => {
+//                 beforeAll(async () => {
+//                     console.log('Reading file : ', element);
 //                 })
-//             }))();
+//                 it('Should be string', () => {
+//                     assert(element === element)
+//                 })
+//             })
+//         });
+//     } else {
+//         console.log('------------------------------------------');
 
-//         (() =>
-//             describe('block 2', () => {
+//         console.log('else  condition');
+//         console.log('------------------------------------------');
 
-//             }))();
-//     });
+//     }
+//     it('Should pass', () => {
+
+//     })
+//     // })
 // })
 
 

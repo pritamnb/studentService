@@ -3,8 +3,11 @@ export class Sample {
       return `Hello ${name}`;
    }
    static testData(inputArray = [], outputArray = []) {
+      inputArray = inputArray.sort((a, b) => a.name.localeCompare(b.name))
+      outputArray = outputArray.sort((a, b) => a.name.localeCompare(b.name))
       console.log("🚀 ~ file: sample.ts:6 ~ Sample ~ testData ~ outputArray", outputArray)
       console.log("🚀 ~ file: sample.ts:6 ~ Sample ~ testData ~ inputArray", inputArray)
+
       // input must be equal to the output
       /**
        * [
@@ -19,8 +22,11 @@ export class Sample {
        */
 
 
-      const results = inputArray.filter(({ name: name1 }) => !outputArray.some(({ name: name2 }) => name2 === name1)); //  input files compared with output files
-      console.log("🚀 ~ file: sample.ts:19 ~ Sample ~ testData ~ results", results)
+      // const results = inputArray.filter(({ name: name1 }) => !outputArray.some(({ name: name2 }) => name2 === name1)); //  input files compared with output files
+      // console.log("🚀 ~ file: sample.ts:19 ~ Sample ~ testData ~ results", results)
+
+
       return true
    }
 }
+// senior associate consultant 
